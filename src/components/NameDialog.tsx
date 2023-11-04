@@ -96,9 +96,9 @@ export default function NameDialog() {
     <Dialog open={dialogOpen} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Welcome to Twitter!</DialogTitle>
+          <DialogTitle>Welcome to Join Me!</DialogTitle>
           <DialogDescription>
-            Tell us your name to start tweeting.
+            Tell us your name to start joining.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">

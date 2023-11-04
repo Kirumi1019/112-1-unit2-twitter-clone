@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-import GrowingTextarea from "@/components/GrowingTextarea";
+import GrowingTextarea_forReply from "@/components/GrowingTextarea_forReply";
 import UserAvatar from "@/components/UserAvatar";
 import useTweet from "@/hooks/useTweet";
 import useUserInfo from "@/hooks/useUserInfo";
@@ -11,18 +11,22 @@ import { cn } from "@/lib/utils";
 type ReplyInputProps = {
   replyToTweetId: number;
   replyToHandle: string;
+  initialLiked: boolean;
 };
 
 export default function ReplyInput({
   replyToTweetId,
   replyToHandle,
+  initialLiked,
 }: ReplyInputProps) {
   const { handle } = useUserInfo();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
   const { postTweet, loading } = useTweet();
 
   const handleReply = async () => {
     const content = textareaRef.current?.value;
+
     if (!content) return;
     if (!handle) return;
 
@@ -55,19 +59,20 @@ export default function ReplyInput({
         <p className="col-start-2 row-start-1 text-gray-500">
           Replying to <span className="text-brand">@{replyToHandle}</span>
         </p>
-        <GrowingTextarea
+        <GrowingTextarea_forReply
+          initialLiked={initialLiked}
           ref={textareaRef}
           wrapperClassName="col-start-2 row-start-2"
           className="bg-transparent text-xl outline-none placeholder:text-gray-500"
-          placeholder="Tweet your reply"
+          placeholder={initialLiked ? "Start discussing!": "Join first!"}
         />
       </div>
       <div className="p-4 text-end">
         <button
-          className={cn(
+          className={initialLiked? cn(
             "my-2 rounded-full bg-brand px-4 py-2 text-white transition-colors hover:bg-brand/70",
             "disabled:cursor-not-allowed disabled:bg-brand/40 disabled:hover:bg-brand/40",
-          )}
+          ) : "invisible"}
           onClick={handleReply}
           disabled={loading}
         >

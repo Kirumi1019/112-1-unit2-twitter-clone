@@ -57,6 +57,7 @@ export const tweetsTable = pgTable(
       }),
     replyToTweetId: integer("reply_to_tweet_id"),
     createdAt: timestamp("created_at").default(sql`now()`),
+    eventTime: varchar("event_at",{length: 50})
   },
   (table) => ({
     userHandleIndex: index("user_handle_index").on(table.userHandle),
@@ -68,6 +69,7 @@ export const tweetsTable = pgTable(
       table.replyToTweetId,
       table.createdAt,
     ),
+    eventTimeIndex: index("duration_time_index").on(table.eventTime)
   }),
 );
 

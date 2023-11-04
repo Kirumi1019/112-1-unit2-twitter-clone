@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import type { EventHandler, MouseEvent } from "react";
 
-import { Heart } from "lucide-react";
+//import { Heart } from "lucide-react";
 
 import useLike from "@/hooks/useLike";
 import { cn } from "@/lib/utils";
@@ -63,6 +63,7 @@ export default function LikeButton({
   }, [initialLikes]);
 
   return (
+    <>
     <button
       className={cn(
         "flex w-16 items-center gap-1 hover:text-brand",
@@ -77,9 +78,10 @@ export default function LikeButton({
           liked && "bg-brand/10",
         )}
       >
-        <Heart size={18} />
+        Join!
       </div>
-      {likesCount > 0 && likesCount}
     </button>
+    Participants: {(likesCount > 0)?likesCount:0}
+    </>
   );
 }

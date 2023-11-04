@@ -1,22 +1,24 @@
-import Image from "next/image";
+//import Image from "next/image";
 import Link from "next/link";
 
 import {
-  Bell,
-  Bookmark,
-  FileText,
+  ArrowLeftRight,
+  //Bell,
+  //Bookmark,
+  //FileText,
   Home,
-  Mail,
-  MoreHorizontal,
-  Search,
-  User,
-  Users,
+  //Mail,
+  //MoreHorizontal,
+  //Search,
+  //User,
+  //Users,
 } from "lucide-react";
 
-import larry from "@/assets/larry.png";
+//import larry from "@/assets/larry.png";
 import { cn } from "@/lib/utils";
 
 import ProfileButton from "./ProfileButton";
+
 
 export default function Header() {
   return (
@@ -25,10 +27,14 @@ export default function Header() {
       <div className="flex flex-col gap-2">
         <div className="p-2">
           <Link href="/">
-            <Image src={larry} alt="Larry the bird" width={40} height={40} />
+            <HeaderButton Icon={ArrowLeftRight} text="Switch User" active />
           </Link>
         </div>
-        <HeaderButton Icon={Home} text="Home" active />
+        {
+       
+        /*
+        <Image src={larry} alt="Larry the bird" width={40} height={40} />
+         <HeaderButton Icon={Home} text="Home" active />
         <HeaderButton Icon={Search} text="Explore" />
         <HeaderButton Icon={Bell} text="Notifications" />
         <HeaderButton Icon={Mail} text="Messages" />
@@ -36,7 +42,8 @@ export default function Header() {
         <HeaderButton Icon={Bookmark} text="Bookmarks" />
         <HeaderButton Icon={Users} text="Communities" />
         <HeaderButton Icon={User} text="Profile" />
-        <HeaderButton Icon={MoreHorizontal} text="More" />
+        <HeaderButton Icon={MoreHorizontal} text="More" />*/
+        }
       </div>
       <ProfileButton />
     </aside>

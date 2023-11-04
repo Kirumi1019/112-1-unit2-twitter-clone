@@ -9,10 +9,12 @@ export default function useTweet() {
   const postTweet = async ({
     handle,
     content,
+    eventTime,
     replyToTweetId,
   }: {
     handle: string;
     content: string;
+    eventTime?: string;
     replyToTweetId?: number;
   }) => {
     setLoading(true);
@@ -22,6 +24,7 @@ export default function useTweet() {
       body: JSON.stringify({
         handle,
         content,
+        eventTime,
         replyToTweetId,
       }),
     });

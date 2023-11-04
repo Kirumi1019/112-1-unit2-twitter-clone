@@ -5,34 +5,32 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { getAvatar } from "@/lib/utils";
 
-import LikeButton from "./LikeButton";
+//import LikeButton from "./LikeButton";
 import TimeText from "./TimeText";
 
-type TweetProps = {
+type EventDiscussProps = {
   username?: string;
   handle?: string;
   id: number;
   authorName: string;
   authorHandle: string;
   content: string;
-  likes: number;
+ // likes: number;
   createdAt: Date;
-  liked?: boolean;
+ // liked?: boolean;
 };
 
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
-export default function Tweet({
+export default function EventDiscuss({
   username,
   handle,
   id,
   authorName,
   authorHandle,
   content,
-  likes,
   createdAt,
-  liked,
-}: TweetProps) {
+}: EventDiscussProps) {
   return (
     <>
       <Link
@@ -65,12 +63,6 @@ export default function Tweet({
             {/* `white-space: pre-wrap` tells html to render \n and \t chracters  */}
             <article className="mt-2 whitespace-pre-wrap">{content}</article>
             <div className="my-2 flex items-center justify-between gap-4 text-gray-400">
-              <LikeButton
-                initialLikes={likes}
-                initialLiked={liked}
-                tweetId={id}
-                handle={handle}
-              />
             </div>
           </article>
         </div>

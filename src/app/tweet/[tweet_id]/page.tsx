@@ -4,16 +4,16 @@ import { redirect } from "next/navigation";
 import { eq, desc, sql, and } from "drizzle-orm";
 import {
   ArrowLeft,
-  MessageCircle,
-  MoreHorizontal,
-  Repeat2,
-  Share,
+  //MessageCircle,
+  //MoreHorizontal,
+  //Repeat2,
+  //Share,
 } from "lucide-react";
 
 import LikeButton from "@/components/LikeButton";
 import ReplyInput from "@/components/ReplyInput";
 import TimeText from "@/components/TimeText";
-import Tweet from "@/components/Tweet";
+import EventDiscuss from "@/components/EventDiscuss";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/db";
 import { likesTable, tweetsTable, usersTable } from "@/db/schema";
@@ -72,6 +72,7 @@ export default async function TweetPage({
       content: tweetsTable.content,
       userHandle: tweetsTable.userHandle,
       createdAt: tweetsTable.createdAt,
+      eventTime: tweetsTable.eventTime,
     })
     .from(tweetsTable)
     .where(eq(tweetsTable.id, tweet_id_num))
@@ -134,6 +135,7 @@ export default async function TweetPage({
     likes: numLikes,
     createdAt: tweetData.createdAt,
     liked: Boolean(liked),
+    eventTime: tweetData.eventTime,
   };
 
   // The following code is almost identical to the code in src/app/page.tsx
@@ -184,7 +186,7 @@ export default async function TweetPage({
           <Link href={{ pathname: "/", query: { username, handle } }}>
             <ArrowLeft size={18} />
           </Link>
-          <h1 className="text-xl font-bold">Tweet</h1>
+          <h1 className="text-xl font-bold">Info</h1>
         </div>
         <div className="flex flex-col px-4 pt-3">
           <div className="flex justify-between">
@@ -204,10 +206,10 @@ export default async function TweetPage({
                 </p>
               </div>
             </div>
-            <button className="h-fit rounded-full p-2.5 text-gray-400 transition-colors duration-300 hover:bg-brand/10 hover:text-brand">
-              <MoreHorizontal size={16} />
-            </button>
           </div>
+          <article className="mt-3 whitespace-pre-wrap text-xl text-gray-500">
+            Event Time: {tweet.eventTime}
+          </article>
           <article className="mt-3 whitespace-pre-wrap text-xl">
             {tweet.content}
           </article>
@@ -216,28 +218,19 @@ export default async function TweetPage({
           </time>
           <Separator />
           <div className="my-2 flex items-center justify-between gap-4 text-gray-400">
-            <button className="rounded-full p-1.5 transition-colors duration-300 hover:bg-brand/10 hover:text-brand">
-              <MessageCircle size={20} className="-scale-x-100" />
-            </button>
-            <button className="rounded-full p-1.5 transition-colors duration-300 hover:bg-brand/10 hover:text-brand">
-              <Repeat2 size={22} />
-            </button>
             <LikeButton
               handle={handle}
               initialLikes={tweet.likes}
               initialLiked={tweet.liked}
               tweetId={tweet.id}
             />
-            <button className="rounded-full p-1.5 transition-colors duration-300 hover:bg-brand/10 hover:text-brand">
-              <Share size={18} />
-            </button>
           </div>
           <Separator />
         </div>
-        <ReplyInput replyToTweetId={tweet.id} replyToHandle={tweet.handle} />
+        <ReplyInput replyToTweetId={tweet.id} replyToHandle={tweet.handle} initialLiked={tweet.liked}/>
         <Separator />
         {replies.map((reply) => (
-          <Tweet
+          <EventDiscuss
             key={reply.id}
             id={reply.id}
             username={username}
@@ -245,8 +238,8 @@ export default async function TweetPage({
             authorName={reply.username}
             authorHandle={reply.handle}
             content={reply.content}
-            likes={reply.likes}
-            liked={reply.liked}
+            //likes={reply.likes}
+            //liked={reply.liked}
             createdAt={reply.createdAt!}
           />
         ))}

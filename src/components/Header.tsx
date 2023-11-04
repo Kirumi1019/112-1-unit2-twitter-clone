@@ -6,7 +6,7 @@ import {
   //Bell,
   //Bookmark,
   //FileText,
-  Home,
+  //Home,
   //Mail,
   //MoreHorizontal,
   //Search,

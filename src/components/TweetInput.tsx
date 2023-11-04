@@ -21,10 +21,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
+import type { Dayjs } from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateRange } from '@mui/x-date-pickers-pro';
+import type { DateRange } from '@mui/x-date-pickers-pro';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { SingleInputDateTimeRangeField } from '@mui/x-date-pickers-pro/SingleInputDateTimeRangeField';
 
@@ -54,8 +55,8 @@ export default function TweetInput() {
       return;
     }
     console.log(eventTime);
-    let start_time = dayjs(eventTime.substring(0, 19));
-    let end_time = dayjs(eventTime.substring(22, 41));
+    const start_time = dayjs(eventTime.substring(0, 19));
+    const end_time = dayjs(eventTime.substring(22, 41));
     if (start_time.isAfter(end_time)){
       alert('Please input valid time of the event!');
       return false;

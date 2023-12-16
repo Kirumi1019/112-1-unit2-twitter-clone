@@ -15,6 +15,7 @@ type GrowingTextarea_forReplyProps = {
   onChange?: (value: string) => void;
 };
 
+
 // this component implements a css hack that allows the textarea to grow with its content
 // I will not explain how it works here, if you are interested, please refer to the following link
 // https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/
